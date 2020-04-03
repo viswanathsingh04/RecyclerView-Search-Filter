@@ -50,7 +50,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> im
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.mText = (TextView) itemView.findViewById(R.id.text);
+            this.mText = itemView.findViewById(R.id.text);
         }
     }
 

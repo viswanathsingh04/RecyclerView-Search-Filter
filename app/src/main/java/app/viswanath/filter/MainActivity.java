@@ -29,13 +29,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();
+        mRecyclerView = findViewById(R.id.recyclerView);
         dataAdapter = new DataAdapter(this, populateData());
         mRecyclerView.setAdapter(dataAdapter);
-    }
-
-    private void initView() {
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
     }
 
     private List<DataModel> populateData() {
@@ -68,6 +64,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        return false;
+        if (!TextUtils.isEmpty(newText)) {
+            dataAdapter.getFilter().filter(newText);
+        } else
+            Toast.makeText(getApplicationContext(), "Please enter name", Toast.LENGTH_SHORT).show();
+        return true;
     }
 }
